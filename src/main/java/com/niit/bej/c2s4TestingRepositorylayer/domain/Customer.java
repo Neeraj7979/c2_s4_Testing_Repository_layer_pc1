@@ -18,4 +18,6 @@ public class Customer {
         this.customerProduct = customerProduct;
     }
 
+    public Customer() {
+    }
 }
