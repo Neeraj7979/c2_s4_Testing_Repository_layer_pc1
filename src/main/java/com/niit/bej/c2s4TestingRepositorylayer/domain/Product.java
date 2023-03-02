@@ -10,4 +10,7 @@ public class Product {
         this.productName = productName;
         this.productDescription = productDescription;
     }
+
+    public Product() {
+    }
 }
