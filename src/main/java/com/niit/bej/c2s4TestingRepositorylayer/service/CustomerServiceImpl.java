@@ -1,6 +1,7 @@
 package com.niit.bej.c2s4TestingRepositorylayer.service;
 
 import com.niit.bej.c2s4TestingRepositorylayer.domain.Customer;
+import com.niit.bej.c2s4TestingRepositorylayer.exception.CustomerAlreadyExistException;
 import com.niit.bej.c2s4TestingRepositorylayer.repository.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -14,8 +15,13 @@ public class CustomerServiceImpl implements CustomerService{
     }
 
     @Override
-    public Customer addCustomer(Customer customer) {
-        return null;
+    public Customer addCustomer(Customer customer) throws CustomerAlreadyExistException {
+        if (customerRepository.findById(customer.getCustomerId()).isPresent())
+            throw new CustomerAlreadyExistException();
+        else
+            return customerRepository.save(customer);
+
+
     }
 
     @Override
