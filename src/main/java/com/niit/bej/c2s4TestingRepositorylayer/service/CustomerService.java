@@ -13,5 +13,5 @@ public interface CustomerService {
 
     boolean deleteById(Integer id) throws CustomerNotFoundException;
 
-    List<Customer> findByProductName(String productName) throws CustomerNotFoundException;
+    List<Customer> getByProductName(String productName) throws CustomerNotFoundException;
 }

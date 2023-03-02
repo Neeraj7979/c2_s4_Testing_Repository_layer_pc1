@@ -9,8 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.util.List;
 import java.util.Optional;
 
-public class CustomerServiceImpl implements CustomerService{
+public class CustomerServiceImpl implements CustomerService {
     CustomerRepository customerRepository;
+
     @Autowired
     public CustomerServiceImpl(CustomerRepository customerRepository) {
         this.customerRepository = customerRepository;
@@ -20,36 +21,34 @@ public class CustomerServiceImpl implements CustomerService{
     public Customer addCustomer(Customer customer) throws CustomerAlreadyExistException {
         if (customerRepository.findById(customer.getCustomerId()).isPresent())
             throw new CustomerAlreadyExistException();
-        else
-            return customerRepository.save(customer);
+        else return customerRepository.save(customer);
 
 
     }
 
     @Override
     public List<Customer> getCustomer() throws ClassNotFoundException {
-        List<Customer> getCustomer=customerRepository.findAll();
-        if (getCustomer.isEmpty())
-            throw new ClassNotFoundException();
-        else
-            return getCustomer;
+        List<Customer> getCustomer = customerRepository.findAll();
+        if (getCustomer.isEmpty()) throw new ClassNotFoundException();
+        else return getCustomer;
     }
 
     @Override
     public boolean deleteById(Integer id) throws CustomerNotFoundException {
-        Optional<Customer>customerOptional=customerRepository.findById(id);
-        if (customerOptional.isPresent()){
-             customerRepository.deleteById(id);
-        return true;}
-
-       else{
-           return false;
+        Optional<Customer> customerOptional = customerRepository.findById(id);
+        if (customerOptional.isPresent()) {
+            customerRepository.deleteById(id);
+            return true;
+        } else {
+            return false;
         }
 
     }
 
     @Override
-    public List<Customer> findByProductName(String productName) {
-        return null;
+    public List<Customer> getByProductName(String productName) throws CustomerNotFoundException {
+        List<Customer> customerList = customerRepository.findByProductName(productName);
+        if (customerList.isEmpty()) throw new CustomerNotFoundException();
+        else return customerList;
     }
 }
