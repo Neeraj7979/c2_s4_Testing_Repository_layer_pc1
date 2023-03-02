@@ -11,4 +11,11 @@ public class Customer {
     private long customerPhoneNo;
     private Product customerProduct;
 
+    public Customer(int customerId, String customerName, long customerPhoneNo, Product customerProduct) {
+        this.customerId = customerId;
+        this.customerName = customerName;
+        this.customerPhoneNo = customerPhoneNo;
+        this.customerProduct = customerProduct;
+    }
+
 }
